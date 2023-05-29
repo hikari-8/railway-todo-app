@@ -27,6 +27,7 @@ export const Home = () => {
     .catch((err) => {
       setErrorMessage(`リストの取得に失敗しました。${err}`);
     })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -112,7 +113,7 @@ const Tasks = (props) => {
   const { tasks, selectListId, isDoneDisplay } = props;
   if (tasks === null) return <></>
 
-  if(isDoneDisplay == "done"){
+  if(isDoneDisplay === "done"){
     return (
       <ul>
         {tasks.filter((task) => {
