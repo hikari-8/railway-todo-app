@@ -16,6 +16,12 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "eslint": "^8.0.1",
+    "eslint-config-standard": "latest",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "latest",
     "react-scripts": "5.0.1"
   },
   "scripts": {
@@ -41,5 +47,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "packageManager": "yarn@3.5.1"
 }
