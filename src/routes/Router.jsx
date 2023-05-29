@@ -13,13 +13,13 @@ import { EditList } from "../pages/EditList";
 import { BrowserRouter } from "react-router-dom";
 
 export const Router = () => {
-  const auth = useSelector((state) => state.auth.isSignIn)
+  const auth = useSelector((state) => state.auth.isSignIn);
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/signin" element={<SignIn />} />
-        <Route  path="/signup" element={<SignUp />} />
+        <Route path="/signup" element={<SignUp />} />
         {auth ? (
           <>
             <Route path="/" element={<Home />} />
@@ -29,12 +29,10 @@ export const Router = () => {
             <Route path="/lists/:listId/edit" element={<EditList />} />
           </>
         ) : (
-          <Route path="/signin" element={
-            <Navigate to="/signin" />
-          } />
+          <Route path="/signin" element={<Navigate to="/signin" />} />
         )}
         <Route element={<NotFound />} />
       </Routes>
     </BrowserRouter>
-  )
-}
+  );
+};
