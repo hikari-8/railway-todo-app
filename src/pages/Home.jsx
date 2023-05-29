@@ -45,7 +45,7 @@ export const Home = () => {
         setErrorMessage(`タスクの取得に失敗しました。${err}`);
       })
     }
-  }, [lists]);
+  }, [cookies.token, lists]);
 
   const handleSelectList = (id) => {
     setSelectListId(id);
