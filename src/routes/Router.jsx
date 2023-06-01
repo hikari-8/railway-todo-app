@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-undef */
 import React from "react";
 import { useSelector } from "react-redux";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, BrowserRouter } from "react-router-dom";
 import { Home } from "../pages/Home";
 import { NotFound } from "../pages/NotFound";
 import { SignIn } from "../pages/SignIn";
@@ -10,7 +10,6 @@ import { NewList } from "../pages/NewList";
 import { EditTask } from "../pages/EditTask";
 import { SignUp } from "../pages/SignUp";
 import { EditList } from "../pages/EditList";
-import { BrowserRouter } from "react-router-dom";
 
 export const Router = () => {
   const auth = useSelector((state) => state.auth.isSignIn);

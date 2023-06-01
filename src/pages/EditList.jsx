@@ -1,11 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useParams,useNavigate  } from "react-router-dom";
 import { Header } from "../components/Header";
 import { url } from "../const";
-import "./editList.css";
+import "./editList.scss";
 
 export const EditList = () => {
   const navigate = useNavigate();
