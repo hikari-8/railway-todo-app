@@ -11,6 +11,7 @@ export const Home = () => {
   const [lists, setLists] = useState([]);
   const [selectListId, setSelectListId] = useState();
   const [tasks, setTasks] = useState([]);
+  const [, setLimit] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [cookies] = useCookies();
   const handleIsDoneDisplayChange = (e) => setIsDoneDisplay(e.target.value);
@@ -42,6 +43,7 @@ export const Home = () => {
         })
         .then((res) => {
           setTasks(res.data.tasks);
+          setLimit(new Date(res.data.limit));
         })
         .catch((err) => {
           setErrorMessage(`タスクの取得に失敗しました。${err}`);
@@ -126,6 +128,15 @@ export const Home = () => {
 // 表示するタスク
 const Tasks = (props) => {
   const { tasks, selectListId, isDoneDisplay } = props;
+  const formatDate = (isoString) => {
+    const date = new Date(isoString);
+    const year = date.getFullYear();
+    const month = ("0" + (date.getMonth() + 1)).slice(-2); // Months are zero indexed, so +1 is necessary
+    const day = ("0" + date.getDate()).slice(-2);
+    const hour = ("0" + date.getHours()).slice(-2);
+    const minute = ("0" + date.getMinutes()).slice(-2);
+    return `${year}/${month}/${day} ${hour}:${minute}`;
+  };
   if (tasks === null) return <></>;
 
   if (isDoneDisplay === "done") {
@@ -141,9 +152,11 @@ const Tasks = (props) => {
                 to={`/lists/${selectListId}/tasks/${task.id}`}
                 className="task-item-link"
               >
-                {task.title}
-                <br />
-                {task.done ? "完了" : "未完了"}
+                <div className="task-item-title">{task.title}</div>
+                <div className="task-item-limit">{formatDate(task.limit)}</div>
+                <div className="task-item-status">
+                  {task.done ? "完了" : "未完了"}
+                </div>
               </Link>
             </li>
           ))}
@@ -163,9 +176,11 @@ const Tasks = (props) => {
               to={`/lists/${selectListId}/tasks/${task.id}`}
               className="task-item-link"
             >
-              {task.title}
-              <br />
-              {task.done ? "完了" : "未完了"}
+              <div className="task-item-title">{task.title}</div>
+              <div className="task-item-limit">{formatDate(task.limit)}</div>
+              <div className="task-item-status">
+                {task.done ? "完了" : "未完了"}
+              </div>
             </Link>
           </li>
         ))}

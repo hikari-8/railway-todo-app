@@ -5,17 +5,21 @@ import { useCookies } from "react-cookie";
 import { url } from "../const";
 import { useNavigate, useParams } from "react-router-dom";
 import "./editTask.scss";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const EditTask = () => {
   const navigate = useNavigate();
   const { listId, taskId } = useParams();
   const [cookies] = useCookies();
   const [title, setTitle] = useState("");
+  const [limit, setLimit] = useState("");
   const [detail, setDetail] = useState("");
   const [isDone, setIsDone] = useState();
   const [errorMessage, setErrorMessage] = useState("");
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDetailChange = (e) => setDetail(e.target.value);
+  const handleLimitChange = (date) => setLimit(date);
   const handleIsDoneChange = (e) => setIsDone(e.target.value === "done");
   const onUpdateTask = () => {
     console.log(isDone);
@@ -23,7 +27,10 @@ export const EditTask = () => {
       title: title,
       detail: detail,
       done: isDone,
+      limit: limit.toISOString().split(".")[0] + "Z",
     };
+    console.log({ data });
+    console.log(typeof data);
 
     axios
       .put(`${url}/lists/${listId}/tasks/${taskId}`, data, {
@@ -67,6 +74,7 @@ export const EditTask = () => {
         setTitle(task.title);
         setDetail(task.detail);
         setIsDone(task.done);
+        setLimit(new Date(task.limit));
       })
       .catch((err) => {
         setErrorMessage(`タスク情報の取得に失敗しました。${err}`);
@@ -88,6 +96,17 @@ export const EditTask = () => {
             onChange={handleTitleChange}
             className="edit-task-title"
             value={title}
+          />
+          <br />
+          <label>リミット</label>
+          <br />
+          <DatePicker
+            dateFormat="yyyy/MM/dd HH:mm"
+            locale="ja"
+            onChange={handleLimitChange}
+            selected={limit}
+            showTimeSelect
+            className="new-task-limit"
           />
           <br />
           <label>詳細</label>

@@ -5,8 +5,8 @@ import { url } from "../const";
 import { Header } from "../components/Header";
 import "./newTask.scss";
 import { useNavigate } from "react-router-dom";
-import DatePicker from "react-datepicker"
-import "react-datepicker/dist/react-datepicker.css"
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const NewTask = () => {
   const [selectListId, setSelectListId] = useState();
@@ -26,10 +26,10 @@ export const NewTask = () => {
       title: title,
       detail: detail,
       done: false,
-      limit: limit.toISOString().split('.')[0] + "Z"
+      limit: limit.toISOString().split(".")[0] + "Z",
     };
-    console.log({data})
-    console.log(typeof data)
+    console.log({ data });
+    console.log(typeof data);
 
     axios
       .post(`${url}/lists/${selectListId}/tasks`, data, {
@@ -44,12 +44,6 @@ export const NewTask = () => {
         setErrorMessage(`タスクの作成に失敗しました。${err}`);
       });
   };
-  // const toUtcIso8601str = (momentInstance) => {
-  //   return momentInstance
-  //     .clone()
-  //     .utc()
-  //     .format('YYYY-MM-DDTHH:mm:00Z')
-  // }
 
   useEffect(() => {
     axios
