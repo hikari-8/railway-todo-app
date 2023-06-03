@@ -91,8 +91,13 @@ export const Home = () => {
               return (
                 <li
                   key={key}
+                  tabIndex={0} // tabIndexを追加してキーボードフォーカスを可能にします
+                  role="button"
                   className={`list-tab-item ${isActive ? "active" : ""}`}
                   onClick={() => handleSelectList(list.id)}
+                  onKeyUp={(event) => {
+                    if (event.key === 'Enter') handleSelectList(list.id);
+                  }}
                 >
                   {list.title}
                 </li>
@@ -137,6 +142,20 @@ const Tasks = (props) => {
     const minute = ("0" + date.getMinutes()).slice(-2);
     return `${year}/${month}/${day} ${hour}:${minute}`;
   };
+  const getRemainingTime = (isoString) => {
+    const current = new Date();
+    const taskDate = new Date(isoString);
+    const diffMs = taskDate - current; // Difference in milliseconds
+
+    if (diffMs < 0) {
+      return "期限切れ";
+    } else {
+      const diffHrs = Math.floor(diffMs / 3600000); // hours
+      const diffMins = Math.round((diffMs % 3600000) / 60000); // minutes
+
+      return `あと${diffHrs}時間${diffMins}分`;
+    }
+  };
   if (tasks === null) return <></>;
 
   if (isDoneDisplay === "done") {
@@ -153,7 +172,9 @@ const Tasks = (props) => {
                 className="task-item-link"
               >
                 <div className="task-item-title">{task.title}</div>
-                <div className="task-item-limit">{formatDate(task.limit)}</div>
+                <div className="task-item-limit">
+                  期限:{formatDate(task.limit)}
+                </div>
                 <div className="task-item-status">
                   {task.done ? "完了" : "未完了"}
                 </div>
@@ -177,7 +198,12 @@ const Tasks = (props) => {
               className="task-item-link"
             >
               <div className="task-item-title">{task.title}</div>
-              <div className="task-item-limit">{formatDate(task.limit)}</div>
+              <div className="task-item-limit">
+                期限:{formatDate(task.limit)}
+              </div>
+              <div className="task-item-remaining">
+                残り時間:{getRemainingTime(task.limit)}
+              </div>
               <div className="task-item-status">
                 {task.done ? "完了" : "未完了"}
               </div>
