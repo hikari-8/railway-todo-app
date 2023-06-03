@@ -1,0 +1,28 @@
+@charset "utf-8";
+
+.header {
+  width: 100%;
+  height: 80px;
+  background-color: #242F9B;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+
+  @media (min-width: 768px) { // For tablets
+    padding: 0 50px;
+  }
+
+  @media (min-width: 1024px) { // For desktop
+    padding: 0 100px;
+  }
+}
+
+.sign-out-button {
+  color: #ffffff;
+  margin: auto 0 auto auto;
+
+  @media (min-width: 768px) { // For tablets
+    margin: auto 25px auto auto;
+  }
+}

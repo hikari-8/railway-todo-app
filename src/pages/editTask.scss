@@ -1,19 +1,19 @@
 @charset "utf-8";
 
 .edit-task {
-  width: 1000px;
+  width: 100%;
   margin: 0 auto;
+  padding: 0 20px;
 
   &-form {
     color: #555555;
   }
 
   &-title, &-detail {
-    width: 300px;
+    width: 100%;
     margin-bottom: 25px;
   }
 }
-
 
 .delete-task-button {
   color: #ff3333;
@@ -24,7 +24,6 @@
   border-radius: 5px;
 }
 
-
 .edit-task-button {
   background-color: #242F9B;
   color: #ffffff;
@@ -33,7 +32,29 @@
   border-radius: 5px;
 }
 
-
 .error-message {
   color: #ff3333;
+}
+
+// For tablets
+@media (min-width: 768px) {
+  .edit-task {
+    width: 750px;
+
+    &-title, &-detail {
+      width: 70%;
+    }
+  }
+}
+
+// For desktop
+@media (min-width: 1024px) {
+  .edit-task {
+    width: 1000px;
+    padding: 0;
+
+    &-title, &-detail {
+      width: 300px;
+    }
+  }
 }

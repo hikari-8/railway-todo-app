@@ -1,15 +1,16 @@
 @charset "utf-8";
 
 .edit-list {
-  width: 1000px;
+  width: 100%;
   margin: 0 auto;
+  padding: 0 20px;
 
   &-form {
     color: #555555;
   }
 
   &-title {
-    width: 300px;
+    width: 100%;
     margin-bottom: 25px;
   }
 }
@@ -33,4 +34,26 @@
 
 .error-message {
   color: #ff3333;
+}
+
+// For tablets
+@media (min-width: 768px) {
+  .edit-list {
+    width: 750px;
+    &-title {
+      width: 100%;
+    }
+  }
+}
+
+// For desktop
+@media (min-width: 1024px) {
+  .edit-list {
+    width: 1000px;
+    padding: 0;
+
+    &-title {
+      width: 300px;
+    }
+  }
 }
